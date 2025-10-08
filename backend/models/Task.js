@@ -7,6 +7,11 @@ const taskSchema = new mongoose.Schema(
             require : true,
             trim : true
         },
+        // optional due date for the task
+        dueDate: {
+            type: Date,
+            default: null
+        },
         status : {
             type : String,
             enum: ["active","complete"],

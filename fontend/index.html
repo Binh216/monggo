@@ -5,15 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Quản lý công việc</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
 <body>
   <div class="container">
     <h1>Quản lý công việc</h1>
-    <div class="task-input">
+    <nav class="top-menu">
+      <button class="menu-item" data-target="tasksPanel">Tasks</button>
+      <button class="menu-item" data-target="peoplePanel">People</button>
+      <button class="menu-item" data-target="settingsPanel">Settings</button>
+    </nav>
+    <section id="tasksPanel">
+      <div class="task-input">
       <input type="text" id="taskName" placeholder="Nhập công việc mới..." />
+      <select id="taskPersonSelect">
+        <option value="">(Chọn người thực hiện)</option>
+      </select>
+      <input type="date" id="taskDue" />
       <button id="addTaskBtn">Thêm</button>
-    </div>
-    <ul id="taskList"></ul>
+      </div>
+      <div class="lists">
+        <div class="list assigned">
+          <h2>Đã giao</h2>
+          <ul id="assignedList"></ul>
+        </div>
+        <div class="list todo">
+          <h2>Cần thực hiện</h2>
+          <ul id="taskList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="peoplePanel" style="display:none">
+      <div class="people-panel">
+        <h2>Người thực hiện</h2>
+        <div class="add-person">
+          <input type="text" id="newPersonName" placeholder="Tên người thực hiện" />
+          <button id="addPersonBtn">Thêm người</button>
+        </div>
+        <ul id="peopleList"></ul>
+      </div>
+    </section>
+
+    <section id="settingsPanel" style="display:none">
+      <h2>Settings</h2>
+      <p>Chưa có cài đặt nào. Bạn có thể thêm các tuỳ chọn ở đây.</p>
+    </section>
   </div>
   <script type="module" src="js/main.js"></script>
 </body>
