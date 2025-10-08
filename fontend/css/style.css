@@ -31,8 +31,32 @@ h1 {
   padding: 0;
 }
 #taskList li {
-  padding: 10px;
-  background: #eee;
-  margin-bottom: 10px;
+  list-style: none;
+  font-size: 17px;
+  padding: 12px 8px 12px 50px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.top-menu {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.top-menu .menu-item {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
   border-radius: 4px;
 }
+.lists {
+  display: flex;
+  gap: 20px;
+}
+.list { flex: 1; }
+.people-panel { margin-top: 20px; }
+.people-panel ul { list-style: none; padding: 0; }
+.people-panel li { padding: 6px 0; }
+

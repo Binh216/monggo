@@ -10,13 +10,43 @@ export const taskModel = {
     if (!response.ok) throw new Error(`getTasks failed: ${response.status} ${response.statusText}`);
     return await response.json();
   },
-  async addTask(name) {
+  async addTask(name, person, dueDate) {
+    const body = { title: name };
+    if (typeof person !== 'undefined' && person !== null) body.person = person;
+    if (typeof dueDate !== 'undefined' && dueDate !== null && dueDate !== '') body.dueDate = dueDate;
     const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: name })
+      body: JSON.stringify(body)
     });
     if (!response.ok) throw new Error(`addTask failed: ${response.status} ${response.statusText}`);
+    return await response.json();
+  }
+  ,
+  async updateTaskStatus(id, completed) {
+    const status = completed ? 'complete' : 'active';
+    const completedAt = completed ? new Date().toISOString() : null;
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status, completedAt })
+    });
+    if (!response.ok) throw new Error(`updateTaskStatus failed: ${response.status} ${response.statusText}`);
+    return await response.json();
+  }
+  ,
+  async updateTask(id, data) {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    if (!response.ok) throw new Error(`updateTask failed: ${response.status} ${response.statusText}`);
+    return await response.json();
+  },
+  async deleteTask(id) {
+    const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    if (!response.ok) throw new Error(`deleteTask failed: ${response.status} ${response.statusText}`);
     return await response.json();
   }
 };

@@ -13,8 +13,8 @@ export const getAllTasks = async (req,res) => {
 
 export const createTask = async (req,res) => {
     try {
-        const {title} = req.body;
-        const task = new Task({title});
+        const {title, person, dueDate} = req.body;
+        const task = new Task({title, person, dueDate});
 
         const newTask = await task.save();
         res.status(201).json(newTask);
@@ -26,11 +26,13 @@ export const createTask = async (req,res) => {
 
 export const updateTask = async (req,res) => {
     try {
-        const {title, status, completedAt} = req.body;
+        const {title, status, completedAt, person, dueDate} = req.body;
         const updateTask = await Task.findByIdAndUpdate(
             req.params.id,
             {
                 title,
+                person,
+                dueDate,
                 status,
                 completedAt
             },
